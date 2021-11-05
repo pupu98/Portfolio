@@ -2,7 +2,7 @@
 -----
 ## Table of Contents
 - [About the Project](#about-the-project)
-- [How to Operate](#How to Operate)
+- [How to Operate](#how-to-operate)
 - [Background](#Background)
 
 ## About the Project
