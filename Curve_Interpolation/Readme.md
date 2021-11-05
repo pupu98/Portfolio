@@ -10,10 +10,10 @@ Cubic interpolations are used so that the cube moves through the points in a cur
 
 You have two choices of different patterns:
 ```
- CatmullRomCurveInterpolation.cs
- ```
- ```
- BezierCurves.cs
+CatmullRomCurveInterpolation.cs
+```
+```
+BezierCurves.cs
 ```
 Initially, the object is created by moving at a constant velocity, reparameterizing by arc length (when distanceInc = time in the update function).
 
