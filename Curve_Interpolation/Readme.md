@@ -9,9 +9,12 @@
 Cubic interpolations are used so that the cube moves through the points in a curved pattern.
 
 You have two choices of different patterns:
- $CatmullRomCurveInterpolation.cs
- $BezierCurves.cs
-
+```
+ CatmullRomCurveInterpolation.cs
+ ```
+ ```
+ BezierCurves.cs
+```
 Initially, the object is created by moving at a constant velocity, reparameterizing by arc length (when distanceInc = time in the update function).
 
 Then, EaseInAndOut function makes the cube slow down when getting to the last point, and start slow from there.
