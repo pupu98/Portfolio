@@ -1,9 +1,9 @@
 # Curve Interpolation
 -----
 ## Table of Contents
-- [About the Project] (#about-the-project)
-- [How to Operate] (#How to Operate)
-- [Background] (#Background)
+- [About the Project](#about-the-project)
+- [How to Operate](#How to Operate)
+- [Background](#Background)
 
 ## About the Project
 ## How to Operate
