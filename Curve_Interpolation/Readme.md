@@ -17,7 +17,7 @@ BezierCurves.cs
 ```
 Initially, the object is created by moving at a constant velocity, reparameterizing by arc length (when distanceInc = time in the update function).
 
-Then, EaseInAndOut function makes the cube slow down when getting to the last point, and start slow from there.
+Then, EaseInAndOut function makes the cube slowly start from point, and down slow to next point.
 
 Additional feature is that we made the object rotate to face forward in the direction it is moving.
 
