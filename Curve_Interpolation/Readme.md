@@ -14,7 +14,7 @@ CatmullRomCurveInterpolation.cs
 ```
 BezierCurves.cs
 ```
-Initially, the object is created by moving at a constant velocity, reparameterizing by arc length (when distanceInc = time in the update function).
+Initially, the object is created by moving at a constant velocity, re-parameterizing by arc length (when distanceInc = time in the update function).
 
 Then, EaseInAndOut function makes the cube slowly start from point, and down slow to end point.
 
