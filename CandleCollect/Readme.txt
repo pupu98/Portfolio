@@ -18,6 +18,3 @@ Project: Candle Collect (in Unity)
 	*Unity package: actual game in unity
 	
 Date: 2021.4.19-2021.4.21
-
-Descriptions:
-	The idea is from the game “Sky: Children of the Light”. A player will collect the fixed candles on a terrain. If player close to the flame, the flame will fly to the player and delete itself, and the player’s score will increase. The fire will destroy and then create an empty to instead. The player has gravity and have collider with terrain to protect not fall. 
