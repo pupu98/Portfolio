@@ -12,6 +12,8 @@ Project: Candle Collect (in Unity)
 		SphereYellow.cs is for drawing sphere yellow
 
 	*User guidance: The more detailed process of creating the game
+	
+	*Documentation: The information of my creation
 
 	*Unity package: actual game in unity
 	
