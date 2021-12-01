@@ -8,8 +8,10 @@ Project: WebGL 3D Fox
 		glMatrix-0.9.5.min.js which is for calculating math
  		lab4.js is the main javascript
 		shaders_setup.js is for setting up shader.
-
-	*For more information, you could see my personal page: https://u.osu.edu/pu.127/webgl/
+	
+	*User guidance: How to use my creation
+	*Documentation: The information of my creation
+	
 
 Date: 2021.11.22
 
