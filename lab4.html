@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Lab4 Pu WebGL &mdash; lab4 </title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+    <script type="text/javascript" src="JS/glMatrix-0.9.5.min.js"></script>
+
+    <!--  ************** Fragment Shader ************* -->
+    <script id="shader-fs0" type="x-shader/x-fragment">
+        precision mediump float;
+
+            uniform mat4 uMMatrix;           //model
+           uniform mat4 uVMatrix;           //view
+           uniform mat4 uPMatrix;           //projection
+           uniform mat4 uNMatrix;           //normal
+
+           uniform vec4 light_pos;          //light position
+           uniform vec4 ambient_coef;       //Ka
+           uniform vec4 diffuse_coef;       //Kd
+           uniform vec4 specular_coef;      //Ks
+           uniform float mat_shininess;     //shininess
+
+           uniform vec4 light_ambient;      //ambient
+           uniform vec4 light_diffuse;      //diffuse
+           uniform vec4 light_specular;     //specular
+
+           uniform int object_mode;       //light source or object
+           uniform int render_mode;       //render type
+
+           varying vec4 eye_pos;            //vertex position in eye space (Xe)
+           varying vec3 v_normal;           //vertex normal
+
+        void main(void) {
+                vec4 color;
+                // transform light pos from world to eye space
+                vec4 light_pos_in_eye = uVMatrix * light_pos;
+
+                // L: light vector L = l-Xe
+                vec3 light_vector = normalize(vec3(light_pos_in_eye - eye_pos));
+
+                // V: eye vector V = eye-p, where eye is (0,0,0) because in the eye space
+                vec3 eye_vector = normalize(-vec3(eye_pos));
+
+                vec4 ambient = ambient_coef * light_ambient;
+
+                //N.L
+                float ndotl = max(dot(v_normal, light_vector), 0.0);
+
+                vec4 diffuse = diffuse_coef * light_diffuse* ndotl;
+
+               // R: both lines below are okay.
+                //  vec3 R= normalize(vec3(reflect(-light_vector, v_normal)));
+               vec3 R = normalize(2.0 * ndotl * v_normal - light_vector);
+
+                //R.V
+                float rdotv = max(dot(R, eye_vector), 0.0);
+
+                vec4 specular;
+                if (ndotl>0.0){
+                   specular = specular_coef * light_specular * pow(rdotv, mat_shininess);
+                }else{
+                   specular = vec4(0,0,0,1);
+                }
+
+               if (object_mode==1){
+                   color = vec4(1,1,1,1);
+               }else{
+                   if (render_mode ==0){
+                        color = ambient + diffuse + specular;
+                    }else if (render_mode==1){
+                        color = ambient;
+                    }else{
+                        color = diffuse;
+                    }
+               }
+                gl_FragColor = color;
+            }
+    </script>
+
+    <script id="shader-fs1" type="x-shader/x-fragment">
+        precision mediump float;
+
+           uniform int object_mode;       //light source or object
+           varying float intensity;
+
+        void main(void) {
+            vec4 color;
+            if (intensity > 0.95 || object_mode == 1) {
+                color = vec4(1.0, 0.7, 0.2, 1.0);
+            }else if (intensity > 0.5){
+                color = vec4(0.9, 0.5, 0.1, 1.0);
+            }else if (intensity > 0.25){
+                color = vec4(0.6, 0.3, 0.05, 1.0);
+            }else {
+                color = vec4(0.4, 0.2, 0.1, 1.0);
+            }
+            gl_FragColor = color;
+
+            }
+    </script>
+    <!--  ************** Vertex Shader ************* -->
+    <script id="shader-vs0" type="x-shader/x-vertex">
+
+        precision mediump float;
+          attribute vec3 aVertexPosition;   //position
+          attribute vec3 aVertexNormal;     //normal
+
+           uniform mat4 uMMatrix;           //model
+           uniform mat4 uVMatrix;           //view
+           uniform mat4 uPMatrix;           //projection
+           uniform mat4 uNMatrix;           //normal
+
+           varying vec4 eye_pos;            //vertex position in eye space (Xe)
+           varying vec3 v_normal;           //vertex normal
+
+
+            void main(void) {
+                // N: transform normal from local to eye space.
+                v_normal =normalize(vec3(uNMatrix*vec4(aVertexNormal,0.0)));
+
+                // Xe: transform the vertex position to eye space
+                eye_pos = uVMatrix*uMMatrix*vec4(aVertexPosition, 1.0);
+
+                gl_Position = uPMatrix*uVMatrix*uMMatrix*vec4(aVertexPosition, 1.0);
+                gl_PointSize = 4.0;
+
+        }
+    </script>
+    <script id="shader-vs1" type="x-shader/x-vertex">
+
+        precision mediump float;
+          attribute vec3 aVertexPosition;   //position
+          attribute vec3 aVertexNormal;     //normal
+
+           uniform mat4 uMMatrix;           //model
+           uniform mat4 uVMatrix;           //view
+           uniform mat4 uPMatrix;           //projection
+           uniform mat4 uNMatrix;           //normal
+
+           uniform vec4 light_pos;          //light position
+       
+           varying vec4 eye_pos;            //vertex position in eye space (Xe)
+           varying vec3 v_normal;           //vertex normal
+           varying float intensity;
+           
+
+            void main(void) {
+
+
+               // transform light pos from world to eye space
+                     vec4 light_pos_in_eye = uVMatrix * light_pos;
+
+                // N: transform normal from local to eye space.
+                v_normal =normalize(vec3(uNMatrix*vec4(aVertexNormal,0.0)));
+
+                // Xe: transform the vertex position to eye space
+                eye_pos = uVMatrix*uMMatrix*vec4(aVertexPosition, 1.0);
+
+                // L: light vector L = l-Xe
+                vec3 light_vector = normalize(vec3(light_pos_in_eye - eye_pos));
+
+                //N.L
+                intensity = max(dot(v_normal, light_vector), 0.0);
+
+
+                gl_Position = uPMatrix*uVMatrix*uMMatrix*vec4(aVertexPosition, 1.0);
+                gl_PointSize = 4.0;
+
+              
+        }
+    </script>
+
+    <script type="text/javascript" src="JS/shaders_setup.js"></script>
+    <script type="text/javascript" src="JS/lab4.js"></script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+    <canvas id="code03-canvas" style="border:none;" width="700" height="700"></canvas>
+
+    <h4> Geometry:  </h4>
+    <button onclick="geometry(0)"> POINTS</button>
+    <button onclick="geometry(1)"> LINEs</button>
+    <button onclick="geometry(2)"> FACES</button>
+
+    <h4> Shape:  </h4>
+    <button onclick="shape(0)"> CUBE</button>
+    <button onclick="shape(1)"> Tetrahedron</button>
+    <button onclick="shape(2)"> Cylinder without Caps</button>
+    <button onclick="shape(3)"> Cone</button>
+    <button onclick="shape(4)"> Sphere</button>
+    <button onclick="shape(5)"> Head</button>
+    <button onclick="shape(6)"> Fox</button>
+
+    <h4> Background:  </h4>
+    <button onclick="BG(1,0,0)"> Red</button>
+    <button onclick="BG(0,1,0)"> Green</button>
+    <button onclick="BG(0,0,1)"> Blue</button>
+    <button onclick="BG(0.5,0.5,0.5)"> Grey</button>
+    <button onclick="BG(0,0,0)"> Black</button>
+    <button onclick="BG(1,1,1)"> White</button>
+
+    <div>
+        <h4>
+            Click on the left mouse button and move the coursor to rotate
+        </h4>
+        <button onclick="redraw()"> Go Back! </button>
+    </div>
+
+    <footer>
+        <center>
+            <p>&copy; CSE 5542 Lab4 WebGL: Jiayi Pu, Ohio State University, 2021</p>
+        </center>
+    </footer>
+
+
+
+
+</body>
+
+</html>
+
