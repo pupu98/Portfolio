@@ -3,7 +3,6 @@
 ## Table of Contents
 - [About the Project](#about-the-project)
 - [How to Operate](#how-to-operate)
-- [Background](#Background)
 
 ## About the Project
 Cubic interpolations are used so that the cube moves through the points in a curved pattern.
@@ -27,7 +26,6 @@ Additional feature is that we made the object rotate to face forward in the dire
 3. Double click "lab5" screen, and run it.
 4. If you want to use different curve, just delete previous in GameObject, and than add script you wanted.
 
-## Background
 
 
  
