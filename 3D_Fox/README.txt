@@ -17,7 +17,7 @@ G/g/H/h/J/j to move the light position
 
 
 
-//Old features
+//Old features from 2D FOX
 For the object:
 S/s to change scale of whole object.
 R to rotate whole object.
