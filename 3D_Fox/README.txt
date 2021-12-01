@@ -13,10 +13,3 @@ Project: WebGL 3D Fox
 
 Date: 2021.11.22
 
-Additional(not required): You can use mouse to rotate.
-
-For the camera:
-V/v/D/d/N/n to camera movement.
-M/m to camera tilt.
-C/c to change camera up/down.
-T/t to change camera left/right.
