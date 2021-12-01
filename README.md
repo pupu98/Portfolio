@@ -1,4 +1,4 @@
-# Profolio
+# Portfolio
 
 Welcome to my profolio page.
 Every folder will include a readme.txt, documentation and guidance.
