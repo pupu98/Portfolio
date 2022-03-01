@@ -27,6 +27,8 @@ parser code {:
 
 :};
 
+/* Following are my code */
+
 terminal RETURN, PRINT, SEMICOLON;
 terminal PLUS, MINUS, LPAREN, RPAREN, LCURLY, RCURLY, TIMES, UMINUS;
 terminal Long    INTCONST;
