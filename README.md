@@ -8,7 +8,7 @@ Every folder will include a readme.txt, documentation and guidance.
 - Guidance is help to set up/ play the program.
 
 
-** Folder Introduction
+## Folder Introduction
 - 3D Fox Folder - Graphics/WebGL
 - Additional Folder \
       - Link State Pattern: state pattern code for Link movements (object-oriented, Team work) \
