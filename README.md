@@ -9,8 +9,8 @@ Every folder will include a readme.txt, documentation and guidance.
 
 Folder Introduction
 - 3D Fox Folder - Graphics/WebGL
-- Additional Folder \n
-      - Link State Pattern: state pattern code for Link movements (object-oriented, Team work) \n
+- Additional Folder \
+      - Link State Pattern: state pattern code for Link movements (object-oriented, Team work) \
       - Language Builder: Interpreter
 
 - Candle Collect - Unity/Shader
