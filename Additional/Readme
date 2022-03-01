@@ -1,4 +1,5 @@
-This game is in process.
+1. Link State Pattern is from a game which is in process.
 Here is the link for the more information updated every sprint 
 (2D game for Legend Of Zelda update): https://u.osu.edu/pu.127/recent-team-work/
 
+2. Language builder now could implement a Quandary interpreter that has all language features EXCEPT functions (except main), calls, mutation, heap, and concurrency. 
